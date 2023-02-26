@@ -5,17 +5,16 @@
   </head>
   <body>
     <div id="root"></div>
-    <script
-      crossorigin
-      src="https://unpkg.com/react@18/umd/react.development.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- React 추가 코드 개발용-->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- ReactDOM 추가 코드 개발용-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+    <!-- 바벨 추가 코드 -->
     <!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
+    <!-- React 추가 코드 배포용-->
     <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
+    <!-- ReactDOM 추가 코드 배포용-->
     <script type="text/babel">
       'use strict';
 
@@ -38,6 +37,7 @@
           return (
             <button
               onClick={() => {
+                // this.state.liked = true; 이렇게 못함 아래처럼해줘야함
                 this.setState({ liked: true });
               }}
             >
@@ -49,11 +49,17 @@
     </script>
     <script type="text/babel">
       // ReactDOM.render(React.createElement(LikeButton), document.querySelector('#root')); // 바벨 사용전 코드
-      // ReactDOM.render(<LikeButton />, document.querySelector('#root')); // React 17 버전 코드
+      // ReactDOM.render(<LikeButton />, document.querySelector('#root')); // React 17 버전 코드 
+      // 리액트 18버전은 17버전도 지원을 함
 
       ReactDOM.createRoot(document.querySelector('#root')).render(
+        <div>
         <LikeButton />
-      ); // React 18버전 코드
+        <LikeButton />
+        <LikeButton />
+        <LikeButton />
+        </div>
+        ); // React 18버전 코드
     </script>
   </body>
 </html>
