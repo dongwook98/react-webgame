@@ -12,47 +12,54 @@
     <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
     <script type="text/babel">
      class GuGuDan extends React.Component {
-      constructor(props) { 
-        super(props);
-        this.state = {
+      // constructor(props) { 
+      //   super(props);
+      // this. 
+      // ▲ 생략가능
+        state = {
           first: Math.ceil(Math.random() * 9),
           second: Math.ceil(Math.random() * 9),
           value: '',
           result: '',
         }
-      }
+      // }
 
       onSubmit = (e) => {
         e.preventDefault();
         if(parseInt(this.state.value) === this.state.first * this.state.second) {
           this.setState((prevState) => {
             return {
-              result: `${prevState.value} 정답`,
+              result: '정답: ' + prevState.value,
               first: Math.ceil(Math.random() * 9),
               second: Math.ceil(Math.random() * 9),
               value: '',
-            };
+            } 
           });
+          this.input.focus();          
         } else {
           this.setState({
             result: '땡',
             value: '',
           });
+          this.input.focus();      
         }
       };
       
-      onChange = (e) => {
+      onChange  = (e) => {
         this.setState({ value: e.target.value });
       };
 
+      onRefInput = (c) => { this.input = c; };
+
       // 컨텐츠 
       render() {
+        console.log('렌더링')
         return (
           <React.Fragment>
             <div>{this.state.first} 곱하기 {this.state.second}는?</div>  
             <form onSubmit={this.onSubmit}>
-              <input type="number" value={this.state.value} onChange={this.onChange}/> 
-              <button>입력!</button>  
+              <input ref={this.onRefInput} type="number" value={this.state.value} onChange={this.onChange}/> 
+              <button type="submit">입력!</button>  
             </form>
             <div>{this.state.result}</div>
           </React.Fragment>
@@ -62,11 +69,7 @@
     </script>
     <script type="text/babel">
       ReactDOM.createRoot(document.querySelector('#root')).render(
-        <div>
         <GuGuDan />
-        <GuGuDan />
-        <GuGuDan /> 
-        </div>
         ); // React 18버전 코드
     </script>
   </body>
