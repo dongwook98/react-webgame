@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>구구단</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // 클래스 컴포넌트의 장점 : state를 바꾸면 render 함수만 렌더링된다.
+
+      // 클래스 컴포넌트의 단점 : 코드가 길어진다.
+      class GuGuDan extends React.Component {
+        // constructor(props) { 
+        //   super(props);
+        // this. 
+        // ▲ 생략가능
+        state = {
+          first: Math.ceil(Math.random() * 9),
+          second: Math.ceil(Math.random() * 9),
+          value: '',
+          result: '',
+        } // 화면에서 바뀔 부분 state로 만들기
+        // }
+
+        // GuGuDan의 메서드
+        onSubmit = (e) => {
+          e.preventDefault();
+          if(parseInt(this.state.value) === this.state.first * this.state.second) {
+            this.setState((prevState) => { 
+              // 옛날 state로 새로운 state 만들어내는 경우 함수를 써준다.
+              // setState가 비동기로 동작하기 때문에 함수형 setState로 만들어 문제를 해결한다.
+              return {
+                result: '정답: ' + prevState.value,
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+              } 
+            });
+            this.input.focus();          
+          } else {
+            this.setState({
+              result: '땡',
+              value: '',
+            });
+            this.input.focus();      
+          }
+        };
+      
+        // GuGuDan의 메서드
+        onChange  = (e) => {
+          this.setState({ value: e.target.value });
+        }; // 일반 함수가 아닌 반드시 화살표함수 사용해라.
+
+        input;
+        // GuGuDan의 메서드
+        onRefInput = (c) => { this.input = c; }; // 리액트에서 DOM 접근은 ref 사용
+
+        // 컨텐츠 
+        render() {
+          console.log('렌더링') // state를 바꾸면 render()만 렌더링된다.
+          return (
+            <React.Fragment> 
+            {/* <> </> Fragment지원 안할때는 React.Fragment 사용  */}
+              <div>{this.state.first} 곱하기 {this.state.second}는?</div>  
+              <form onSubmit={this.onSubmit}>
+                <input ref={this.onRefInput} type="number" value={this.state.value} onChange={this.onChange}/> 
+                <button type="submit">입력!</button> 
+                {/* 리액트에서는 
+                  * class -> className 
+                  * for -> htmlFor
+                */} 
+              </form>
+              <div>{this.state.result}</div>
+            </React.Fragment>
+          );
+        };
+      };
+    </script>
+    <script type="text/babel">
+      ReactDOM.createRoot(document.querySelector('#root')).render(
+        <GuGuDan />
+        );
+    </script>
+  </body>
+</html>
