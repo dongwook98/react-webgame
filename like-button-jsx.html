@@ -34,32 +34,30 @@
           //   { onClick: () => this.setState({ liked: true }) },
           //   'Like'
           // );
+          // ▼ 위 주석을 바벨을 사용해 JSX 로 쓸 수 있다. 
           return (
-            <button
-              onClick={() => {
+            <button onClick={() => {
                 // this.state.liked = true; 이렇게 못함 아래처럼해줘야함
                 this.setState({ liked: true });
               }}
-            >
-              Like
-            </button>
+            >Like</button>
           );
         }
       }
     </script>
     <script type="text/babel">
       // ReactDOM.render(React.createElement(LikeButton), document.querySelector('#root')); // 바벨 사용전 코드
-      // ReactDOM.render(<LikeButton />, document.querySelector('#root')); // React 17 버전 코드 
+      ReactDOM.render(<div><LikeButton /><LikeButton /><LikeButton /></div>, document.querySelector('#root')); // React 17 버전 코드 
       // 리액트 18버전은 17버전도 지원을 함
 
-      ReactDOM.createRoot(document.querySelector('#root')).render(
-        <div>
-        <LikeButton />
-        <LikeButton />
-        <LikeButton />
-        <LikeButton />
-        </div>
-        ); // React 18버전 코드
+      // ReactDOM.createRoot(document.querySelector('#root')).render(
+      //   <div>
+      //   <LikeButton />
+      //   <LikeButton />
+      //   <LikeButton />
+      //   <LikeButton />
+      //   </div>
+      //   ); // React 18버전 코드
     </script>
   </body>
 </html>
