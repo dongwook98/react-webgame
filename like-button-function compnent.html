@@ -6,15 +6,10 @@
   <body>
     <div id="root"></div>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <!-- React 추가 코드 개발용-->
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <!-- ReactDOM 추가 코드 개발용-->
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> 
-    <!-- 바벨 추가 코드 -->
     <!--<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>-->
-    <!-- React 추가 코드 배포용-->
     <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
-    <!-- ReactDOM 추가 코드 배포용-->
     <script type="text/babel">
       'use strict';
 
@@ -41,7 +36,7 @@
       const LikeButton = () => {
         // 함수 컴포넌트는 this 쓸 일이 없다.
         const [liked, setLiked] = React.useState(false); // 구조분해 
-        // 함수든 클래스든 뭔짓을 하든, 결국 return한게 화면인거에요.
+        // 함수든 클래스든 뭔짓을 하든, 결국 return 한게 화면이다.
         if (liked) {
           return 'You liked this.'
         }
